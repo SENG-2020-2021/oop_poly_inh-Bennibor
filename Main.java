@@ -4,13 +4,60 @@ import java.util.Scanner;
 class Main {
   public static void main(String[] args) {
     //Declare a char to store the chosen quadilateral
-
+char quad;
+Scanner sc= new Scanner (System.in);
+Scanner scan= new Scanner (System.in);
+System.out.println("1.rhombus\n2.square\n3.trapezoid\n4.rectangle\n5.parallelogram");
+System.out.println("enter choice :");
+quad=sc.next().charAt(0);
     //using a switch check what the user selected and use it to calculate the perimeter and area of the desired quadilateral
+switch(quad){
+  case '1':
+  System.out.println("calculation for rhombus");
+  System.out.println("input first side of the rhombus");
+  float a = scan.nextFloat();
+  System.out.println("input second side of the rhombus");
+  float b = scan.nextFloat();
+  System.out.println("input third side of the rhombus");
+   float c = scan.nextFloat();
+   System.out.println("input fourth side of the rhombus");
+   float d = scan.nextFloat();
+   System.out.println("input first diagonal of the rhombus");
+   float d1 = scan.nextFloat();
+   System.out.println("input second diagonal of the rhombus");
+   float d2 = scan.nextFloat();
+   Rhombus r= new Rhombus (a,b,c,d,d1,d2);
+   System.out.printf("The perimeter of the rhombus with First side: %.2f, Second side: %.2f, Third side: %.2f, Fourth side: %.2f, First diagonal %.2f and Second diagonal %.2f is %.2f", a, b, c, d, d1, d2, r.area());
+   break;
 
+ 
+ case '2': System.out.println("Calculation for square");
+       System.out.println("Input one side of square");
+      float ab = scan.nextFloat();
+           Square n = new Square(ab);
+      System.out.printf("The perimeter of the square with  Side: %.2f is %.2f", ab, n.calculatePerimeter()); 
+       System.out.println("");
+       System.out.printf("The area of the square with Side: %.2f is %.2f", ab, n.area()); 
+      break;
+   
+   
+    case '3': System.out.println("Calculation for a rectangle");
+       System.out.println("Input length of the rectangle");
+      float a2 = scan.nextFloat();
+        System.out.println("Input breadth of the rectangle");
+      float b2 = scan.nextFloat();
+           Rectangle re = new Rectangle(a2,b2);
+      System.out.printf("The perimeter of the rectangle with  length: %.2f and breadth %.2f is %.2f", a2,b2, re.calculatePerimeter()); 
+       System.out.println("");
+       System.out.printf("The area of the rectangle with length: %.2f and breadth %.2f is %.2f", a2,b2, re.area()); 
+      break;
+
+
+
+}
     //this should be in the parallelogram case
     System.out.println("This program calculates the area and perimeter of the parallelogram.");
     System.out.println("Input the base of your Parallelogram");
-    Scanner scan = new Scanner(System.in);
     float pBase = scan.nextFloat();
     System.out.println("Input the height of your Parallelogram");
     float pHeight = scan.nextFloat();
@@ -48,13 +95,73 @@ class Main {
 }
 
 //Create class for Rhombus
+ class Rhombus extends Quadilateral{
+  private float side1;
+  private float side2;
+  private float side3;
+  private float side4;
+  private float diag1;
+  private float diag2;
 
+  public Rhombus(float s1,float s2,float s3,float s4,float d1,float d2){
+   side1=s1;
+   side2=s2;
+   side3=s3;
+   side4=s4;
+   diag1=d1;
+   diag2=d2;
+  }
+    public float calculatePerimeter(){
+    return side1+side2+side3+side4;
+  }
+    public float area(){
+    return (diag1*diag2)/2;
+  }
+
+
+}
 
 //Create class for square
+class Square extends Quadilateral{
+   private float side1;
 
+public Square(float s1){
+    if (s1 <= 0){
+      System.out.println("You cannot have a negative or zero base. Therfore base rezturns to default which is 1");
+      s1 = 1;
+    }
+    else
+      side1 = s1;
+}
+    
+    public float calculatePerimeter(){
+    return 4*side1;
+  }
+    public float area(){
+    return side1*side1;
+  }
+
+}
 
 
 //create class for Rectangle
+class Rectangle extends Quadilateral{
+  private float length;
+  private float breadth;
+
+  public Rectangle(float l,float b){
+    length=l;
+    breadth=b;
+  }
+
+    public float area(){
+    return length*breadth;
+  }
+
+    public float calculatePerimeter(){
+    return 2*(length+breadth);
+  }
+}
 
 
 class Trapezoid extends Quadilateral{
